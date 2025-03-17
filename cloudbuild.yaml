@@ -1,0 +1,14 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker pull gcr.io/fldemo2/test4-29980-dev:latest || exit 0']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+        'build',
+        '-t', 'gcr.io/fldemo2/test4-29980-dev:latest',
+        '--file', 'Dockerfile.dev',
+        '--cache-from', 'gcr.io/fldemo2/test4-29980-dev:latest',
+        '.'
+    ]
+images: ['gcr.io/fldemo2/test4-29980-dev:latest']
+logsBucket: 'gs://fldemo2-cloudbuild-logs'
